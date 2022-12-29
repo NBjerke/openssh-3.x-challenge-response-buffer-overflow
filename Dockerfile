@@ -1,10 +1,10 @@
-FROM i386/debian:wheezy
+FROM lpenz/debian-wheezy-i386
 
 RUN apt-get update && \
-    apt-get -y install build-essential libssl-dev zlib1g-dev curl ca-certificates && \
+    apt-get -y --force-yes install build-essential libssl-dev zlib1g-dev curl ca-certificates && \
     mkdir x && cd x && \
-    curl -o openssh-3.4p1.tar.gz  https://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-3.4p1.tar.gz && \
-    curl -o 21579.tar.gz  https://raw.githubusercontent.com/offensive-security/exploitdb-bin-sploits/master/bin-sploits/21579.tar.gz  && \
+    curl --insecure -o openssh-3.4p1.tar.gz  https://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-3.4p1.tar.gz && \
+    curl --insecure -o 21579.tar.gz https://gitlab.com/exploit-database/exploitdb-bin-sploits/-/raw/main/bin-sploits/21579.tar.gz  && \
     tar xzvf 21579.tar.gz && \
     tar xzvf openssh-3.4p1.tar.gz && \
     cd openssh-3.4p1 && \
@@ -12,7 +12,6 @@ RUN apt-get update && \
     ./configure && \
     make ssh && \
     cp ssh /usr/bin/ssh && \
-    apt-get -y remove build-essential && \
+    apt-get -y --force-yes remove build-essential && \
     rm -rf /var/lib/apt/lists/*
-
 ENTRYPOINT ["/usr/bin/ssh"]
