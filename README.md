@@ -2,7 +2,6 @@
 SSH binary for exploiting OpenSSH 3.x - Challenge-Response Buffer Overflow
 
 Note: this is an ancient flaw so hopefully you won't find any vulnerable services out there anymore.
-Publishing it as it might be handful during some CTF games.
 
 More info:
 
